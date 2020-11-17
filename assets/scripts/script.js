@@ -4,7 +4,7 @@ const BACK = "card_back";
 const CARD = 'card';
 const ICON = "icon";
 
-let techs = [
+/* let techs = [
     'bootstrap',
     'css',
     'electron',
@@ -15,21 +15,21 @@ let techs = [
     'mongo',
     'node',
     'react'
-];
-let cards = null;
+]; */
+/* let cards = null; */
 startGame();
 
 function startGame(){    // FUNÇÃO PARA COMEÇAR O JOGO
-    cards = creatCardsFromTechs(techs);
-    embaralharCards(cards);
-    inicializarCards(cards);
-    console.log(cards);
+    /* cards = game.createCardsFromTechs(); */
+    /* embaralharCards(cards); */
+    inicializarCards(game.createCardsFromTechs());
+    /* console.log(cards); */
 }
 
 function inicializarCards(cards){ // FUNÇÃO PARA PEGAR OS MODELOS DAS CARTAS E TRANSFORMAR EM  VISUAL
     let gameBoard = document.getElementById('gameBoard');
 
-    cards.forEach(card =>{
+    game.cards.forEach(card =>{
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add(CARD);
@@ -67,7 +67,7 @@ function creatCardFace(face, card, element){    // FUNÇÃO PARA CRIAR ELEMENTOS
 
 
 
-function embaralharCards(techs){ //FUNÇÃO PARA EMBARALHAR AS CARTAS
+/* function embaralharCards(techs){ //FUNÇÃO PARA EMBARALHAR AS CARTAS
     let indiceAtual = cards.length;
     let randomIndice = 0;
 
@@ -79,9 +79,9 @@ function embaralharCards(techs){ //FUNÇÃO PARA EMBARALHAR AS CARTAS
         [cards[randomIndice], cards[indiceAtual]] =  [cards[indiceAtual], cards[randomIndice]];
     }
 
-}
-
-creatCardsFromTechs(techs);
+} */
+/* 
+creatCardsFromTechs(techs); 
 
 function creatCardsFromTechs(techs) {  // FUNÇÃO PARA CRIAR CARTAS
 
@@ -110,7 +110,7 @@ function createPairFromTech(tech) {  // FUNÇÃO PARA CRIAR  PARES DE CARTAS
 function createIdWithTech(tech) {  // FUNÇÃO PARA CRIAR ID RANDÔMICO
     return tech + parseInt(Math.random() * 1000);
 
-}
+} */
 
 function flipCard(){
     this.classList.add("flip");
