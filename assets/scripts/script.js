@@ -19,17 +19,17 @@ const ICON = "icon";
 /* let cards = null; */
 startGame();
 
-function startGame(){    // FUNÇÃO PARA COMEÇAR O JOGO
+function startGame() {    // FUNÇÃO PARA COMEÇAR O JOGO
     /* cards = game.createCardsFromTechs(); */
     /* embaralharCards(cards); */
     inicializarCards(game.createCardsFromTechs());
     /* console.log(cards); */
 }
 
-function inicializarCards(cards){ // FUNÇÃO PARA PEGAR OS MODELOS DAS CARTAS E TRANSFORMAR EM  VISUAL
+function inicializarCards(cards) { // FUNÇÃO PARA PEGAR OS MODELOS DAS CARTAS E TRANSFORMAR EM  VISUAL
     let gameBoard = document.getElementById('gameBoard');
 
-    game.cards.forEach(card =>{
+    game.cards.forEach(card => {
         let cardElement = document.createElement('div');
         cardElement.id = card.id;
         cardElement.classList.add(CARD);
@@ -40,26 +40,26 @@ function inicializarCards(cards){ // FUNÇÃO PARA PEGAR OS MODELOS DAS CARTAS E
         cardElement.addEventListener('click', flipCard);
         gameBoard.appendChild(cardElement);
     })
-    
+
 }
 
-function createCardContent(card, cardElement){   
+function createCardContent(card, cardElement) {
 
     creatCardFace(FRONT, card, cardElement);
     creatCardFace(BACK, card, cardElement);
 
 }
 
-function creatCardFace(face, card, element){    // FUNÇÃO PARA CRIAR ELEMENTOS HTML
+function creatCardFace(face, card, element) {    // FUNÇÃO PARA CRIAR ELEMENTOS HTML
 
     let cardElementFace = document.createElement('div');
     cardElementFace.classList.add(face);
-    if(face===FRONT){
+    if (face === FRONT) {
         let iconElement = document.createElement('img');
         iconElement.classList.add(ICON);
         iconElement.src = "./assets/imagens/" + card.icon + ".png";
         cardElementFace.appendChild(iconElement);
-    }else{
+    } else {
         cardElementFace.innerHTML = "&lt/&gt";
     }
     element.appendChild(cardElementFace);
@@ -112,7 +112,22 @@ function createIdWithTech(tech) {  // FUNÇÃO PARA CRIAR ID RANDÔMICO
 
 } */
 
-function flipCard(){
-    this.classList.add("flip");
+function flipCard() {
+    if (game.setCard(this.id)) {
+
+        this.classList.add("flip");
+        if (game.checkMatch()) {
+            game.clearCards();
+        } else {
+            setTimeout(() => {
+                let firstCardView = document.getElementById(game.firstCard.id);
+                let secondCardView = document.getElementById(game.secondCard.id);
+
+                firstCardView.classList.remove('flip');
+                secondCardView.classList.remove('flip');
+                game.clearCards();
+            }, 1000);
+        };
+    };
 
 }
